@@ -1,0 +1,11 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3302
+
+This plugin use clang for accurately completing C and C++ code.
+
+You don't need any ctags for it to work! Only clang is needed. Clang version 2.8 or higher is recommended for c++ completion. After a . , -> and :: it is automatically trying to complete the code. If you want to "force" the completion, use <C-X><C-U> which is the mapping for user defined completion (It may be changed to omnicomplete mapping in a near future). Because clang is parsing your source file, it can detect errors inside your code. Due to a bug in vim, it cannot automatically open the quickfix window (vim-dev: http://groups.google.com/group/vim_dev/browse_thread/thread/5ff146af941b10da), but it will fill it with clang errors, so open-up the quickfix window while completing can help you finding errors on your code!
+
+If you've got special flags for a project (especially -I and -D ones), clang may be unable to complete your code. To overcome this limitation put the flags inside the file .clang_complete at the root of your project.
+
+Latest version will always be on github: http://github.com/Rip-Rip/clang_complete
+
+Do not hesitate to report bugs or ask for features.
