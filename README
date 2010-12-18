@@ -2,7 +2,9 @@ This is a mirror of http://www.vim.org/scripts/script.php?script_id=3302
 
 This plugin use clang for accurately completing C, C++, Objective-C and Objective-C++ code.
 
-You don't need any ctags for it to work! Only clang is needed. Clang version 2.8 or higher is recommended for c++ completion. After a . , -> and :: it is automatically trying to complete the code. If you want to "force" the completion, use <C-X><C-U> which is the mapping for user defined completion (It may be changed to omnicomplete mapping in a near future). Because clang is parsing your source file, it can detect errors inside your code, and highlight them! Plus it can open the quickfix window automatically,
+You don't need any ctags for it to work! Only clang is needed. Clang version 2.8 or higher is recommended for c++ completion. After a . , -> and :: it is automatically trying to complete the code. If you want to "force" the completion, use <C-X><C-U> which is the mapping for user defined completion. Because clang is parsing your source file, it can detect errors inside your code, and highlight them! Plus it can open the quickfix window automatically.
+
+Since version 1.4, snippets can be used to complete function arguments. It is triggered after a completion, and you can go to the next argument with the <Tab> key in normal mode.
 
 If you've got special flags for a project (especially -I and -D ones), clang may be unable to complete your code. To overcome this limitation put the flags inside the file .clang_complete at the root of your project.
 
@@ -31,6 +33,25 @@ Configuration:
        Default: 0
 
   - g:clang_snippets:
-       if equal to 1, it will do some snippets magic after a '(' or a ','
-       inside function call. Not currently fully working.
+       if equal to 1, it will do some snippets magic by completing function arguments.
        Default: 0
+
+   - g:clang_conceal_snippets:
+        if equal to 1, vim will use vim 7.3 conceal feature to hide <#
+        and #> which delimit a snippets.
+        Note: See concealcursor and conceallevel for conceal configuration.
+        Default: 1 (0 if conceal not available)
+
+   - g:clang_exec:
+        Name or path of clang executable.
+        Note: Use this if clang has a non-standard name, or isn't in the
+        path.
+        Default: 'clang'
+
+   - g:clang_user_options:
+        Option added at the end of clang command. Useful if you want to
+        filter the result, or if you want to ignore the error code
+        returned by clang: on error, the completion is not shown.
+        Default: ''
+        Example: '|| exit 0' (it will discard clang return value)
+
